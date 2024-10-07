@@ -1,7 +1,7 @@
 # ESLint config for Estudio Cactus's projects
 
 A [TypeScript](https://www.typescriptlang.org/) and
-[ESLint v8](ihttps://eslint.org/docs/v8.x/) config for Sotecla's projects using
+[ESLint v8](https://eslint.org/docs/v8.x/) config for Sotecla's projects using
 [Prettier](https://prettier.io/) for code formatting inside `eslintrc` file.
 
 > [!NOTE]
