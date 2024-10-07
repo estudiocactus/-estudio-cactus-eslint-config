@@ -1,10 +1,10 @@
-import { type TSESLint } from "@typescript-eslint/utils";
+import { type TSESLint } from '@typescript-eslint/utils'
 
-import config from ".";
+import config from '.'
 
 const nextjsConfig: TSESLint.ClassicConfig.Config = {
   ...config,
-  extends: [...(config.extends as string[]), "plugin:@next/next/recommended"],
-};
+  extends: [...(config.extends as string[]), 'plugin:@next/next/recommended']
+}
 
-export = nextjsConfig;
+export = nextjsConfig

@@ -60,8 +60,8 @@ Add this to your `.eslintrc.cjs` file:
 
 ```javascript
 module.exports = {
-  extends: ["@estudio-cactus/eslint-config"], // or '@estudio-cactus/eslint-config/nextjs' for NextJS projects
+  extends: ['@estudio-cactus/eslint-config'] // or '@estudio-cactus/eslint-config/nextjs' for NextJS projects
   // it can also be used as `'@estudio-cactus'` and `'@estudio-cactus/nextjs'` for NextJS projects
   // ...
-};
+}
 ```

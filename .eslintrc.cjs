@@ -1,13 +1,13 @@
 module.exports = {
   overrides: [
     {
-      parser: "@typescript-eslint/parser",
+      parser: '@typescript-eslint/parser',
       parserOptions: {
-        project: true,
+        project: true
       },
-      files: ["*.ts", "*.js"],
-      extends: ["./lib/index.js"],
-    },
+      files: ['*.ts', '*.js'],
+      extends: ['./lib/index.js']
+    }
   ],
-  ignorePatterns: ["lib"],
-};
+  ignorePatterns: ['lib']
+}
