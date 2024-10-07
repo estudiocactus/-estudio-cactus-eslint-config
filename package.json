@@ -1,0 +1,99 @@
+{
+  "name": "@estudio-cactus/eslint-config",
+  "version": "0.0.0-development",
+  "description": "A TypeScript, ESLint and Prettier configuration package focused on Estudio Cactus's projects",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./nextjs": {
+      "import": "./lib/nextjs.js",
+      "require": "./lib/nextjs.js",
+      "types": "./lib/nextjs.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier . --write"
+  },
+  "engines": {
+    "node": ">=18.20.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estudiocactus/eslint-config.git"
+  },
+  "author": "Alejandro Suero Mejías <alejandro.suero@sotecla.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/estudiocactus/eslint-config/issues"
+  },
+  "homepage": "https://github.com/estudiocactus/eslint-config#readme",
+  "keywords": [
+    "check",
+    "checker",
+    "code",
+    "code checker",
+    "code linter",
+    "code standards",
+    "code style",
+    "enforce",
+    "eslint",
+    "eslintconfig",
+    "hint",
+    "jscs",
+    "jshint",
+    "lint",
+    "policy",
+    "quality",
+    "simple",
+    "style",
+    "style checker",
+    "style linter",
+    "verify",
+    "TypeScript"
+  ],
+  "dependencies": {
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "@next/eslint-plugin-next": "13.4.3",
+    "typescript-eslint": "^7.0.1"
+  },
+  "peerDependencies": {
+    "eslint": "^8.0.1",
+    "typescript": "*"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.40.0",
+    "semantic-release": "22.0.5",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@types/node": "20.12.7",
+    "eslint": "^8.0.1",
+    "prettier": "^3.3.3",
+    "tsconfigs": "^4.0.2",
+    "typescript": "5.5.4",
+    "typescript-eslint_bottom": "npm:typescript-eslint@7.0.1"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/index.d.ts",
+    "lib/nextjs.js",
+    "lib/nextjs.d.ts",
+    "lib/rules.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

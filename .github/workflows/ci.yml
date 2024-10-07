@@ -1,0 +1,87 @@
+name: Release to NPM
+on:
+  pull_request: {}
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  commitlint:
+    name: Lint commit messages
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+      # Hiding tsconfig.json to workaround
+      # https://github.com/conventional-changelog/commitlint/issues/3256
+      - run: mv tsconfig.json tsconfig.json.nope
+      - name: commitlint
+        run: |
+          npx commitlint \
+            --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} \
+            --to ${{ github.event.pull_request.head.sha }} \
+            --verbose
+      - run: mv tsconfig.json.nope tsconfig.json
+  publish:
+    name: Publish to NPM
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ${{ fromJSON(needs.get-node-versions.outputs.versions) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build
+      - run: npm audit signatures
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  ci:
+    needs: lint
+    runs-on: ubuntu-latest
+    if: ${{ !cancelled() }}
+    steps:
+      - run: if [ "${{ needs.lint.result }}" != "success" ]; then exit 1; fi
+  lint:
+    needs: get-node-versions
+    name: Lint code
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ${{ fromJSON(needs.get-node-versions.outputs.versions) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+  get-node-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: get
+        run: |
+          set -euxo pipefail
+          active_versions=$(bash get-node-versions.sh)
+          echo "active=$active_versions" >> "$GITHUB_OUTPUT"
+    outputs:
+      versions: ${{ steps.get.outputs.active }}
