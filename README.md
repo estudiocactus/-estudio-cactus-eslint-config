@@ -1,4 +1,4 @@
-# ESLint config for SOTECLA's projects
+# ESLint config for Estudio Cactus's projects
 
 A [TypeScript](https://www.typescriptlang.org/) and
 [ESLint v8](ihttps://eslint.org/docs/v8.x/) config for Sotecla's projects using
@@ -60,8 +60,8 @@ Add this to your `.eslintrc.cjs` file:
 
 ```javascript
 module.exports = {
-  extends: ["eslint-config-sotecla"], // or 'eslint-config-sotecla/nextjs' for NextJS projects
-  // it can also be used as `'sotecla'` and `'sotecla/nextjs'` for NextJS projects
+  extends: ["@estudio-cactus/eslint-config"], // or '@estudio-cactus/eslint-config/nextjs' for NextJS projects
+  // it can also be used as `'@estudio-cactus'` and `'@estudio-cactus/nextjs'` for NextJS projects
   // ...
 };
 ```
