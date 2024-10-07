@@ -35,7 +35,9 @@ jobs:
       - run: mv tsconfig.json.nope tsconfig.json
   publish:
     name: Publish to NPM
-    needs: ci
+    needs:
+      - ci
+      - get-node-versions
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     strategy:
