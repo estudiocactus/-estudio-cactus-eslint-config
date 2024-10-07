@@ -48,6 +48,7 @@ jobs:
       - run: npm audit signatures
       - run: npx semantic-release
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   ci:
@@ -57,29 +58,14 @@ jobs:
     steps:
       - run: if [ "${{ needs.lint.result }}" != "success" ]; then exit 1; fi
   lint:
-    needs: get-node-versions
     name: Lint code
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ${{ fromJSON(needs.get-node-versions.outputs.versions) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18
       - run: npm ci
       - run: npm run build
       - run: npm run lint
       - run: npm run format:check
-  get-node-versions:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - id: get
-        run: |
-          set -euxo pipefail
-          active_versions=$(bash get-node-versions.sh)
-          echo "active=$active_versions" >> "$GITHUB_OUTPUT"
-    outputs:
-      versions: ${{ steps.get.outputs.active }}
