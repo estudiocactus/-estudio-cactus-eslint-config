@@ -35,19 +35,14 @@ jobs:
       - run: mv tsconfig.json.nope tsconfig.json
   publish:
     name: Publish to NPM
-    needs:
-      - ci
-      - get-node-versions
+    needs: ci
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ${{ fromJSON(needs.get-node-versions.outputs.versions) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18
       - run: npm ci
       - run: npm run build
       - run: npm audit signatures
