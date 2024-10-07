@@ -75,10 +75,7 @@
   "devDependencies": {
     "@types/eslint": "^8.40.0",
     "semantic-release": "22.0.5",
-    "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/git": "10.0.1",
     "@types/node": "20.12.7",
-    "conventional-changelog-conventionalcommits": "8.0.0",
     "eslint": "^8.0.1",
     "prettier": "^3.3.3",
     "tsconfigs": "^4.0.2",
